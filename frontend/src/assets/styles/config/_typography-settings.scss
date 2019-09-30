@@ -1,0 +1,25 @@
+$typo: (
+  size: (
+    small: pxToRem(12),
+    normal: pxToRem(14),
+    medium: pxToRem(18),
+    large: pxToRem(21),
+    xlarge: pxToRem(24),
+    xxlarge: pxToRem(32),
+    xxxlarge: pxToRem(42),
+    huge: pxToRem(56)
+  ),
+
+  weight: (
+    thin: 200,
+    light: 300,
+    normal: 400,
+    medium: 500,
+    bold: 700,
+    black: 900
+  ),
+
+  lineHeight: 1.4285
+);
+
+

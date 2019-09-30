@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span>Dependency Manager</span>
+        <span class="spacer"></span>
+        <a mat-button [routerLink]="'/main/repos'" routerLinkActive="active">Repositories</a>
+        <a mat-button [routerLink]="'/main/graph'" routerLinkActive="active">Graph</a>
+        <button mat-button [matMenuTriggerFor]="menu">
+            @{{ username }}
+            <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="logout()">
+                <span>Logout</span>
+            </button>
+        </mat-menu>
+    </mat-toolbar-row>
+</mat-toolbar>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>

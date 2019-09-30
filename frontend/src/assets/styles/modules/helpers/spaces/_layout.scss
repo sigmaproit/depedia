@@ -1,0 +1,32 @@
+@mixin init-spaces() {
+  $base: $space-base;
+  $dirs: top right bottom left default;
+
+  $spaces: (
+    tiny: pxToRem($base / 4, $base),
+    small: pxToRem($base / 2, $base),
+    default: pxToRem($base, $base),
+    medium: pxToRem($base * 1.5, $base),
+    large: pxToRem($base * 2, $base),
+    huge: pxToRem($base * 3, $base),
+  );
+
+  @each $dir in $dirs {
+    @each $space, $val in $spaces {
+      $direction: if($dir == default, '', '-#{$dir}');
+      $paddSuffix: if($dir == default, '', '-#{$dir}');
+      $spaceSuffix: if($space == default, '', '-#{$space}');
+      $suffix: $paddSuffix + $spaceSuffix;
+
+
+      .p-margin#{$suffix} {
+        margin#{$direction}: $val;
+      }
+
+      .p-padding#{$suffix} {
+        padding#{$direction}: $val;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,15 @@
+@mixin init-error-layout() {
+  %error {
+    margin-bottom: 2rem;
+    padding: .5rem;
+
+    &__title {
+      margin-bottom: .5rem;
+    }
+
+    &__message + &__message {
+      margin-top: .5rem;
+    }
+  }
+}
+

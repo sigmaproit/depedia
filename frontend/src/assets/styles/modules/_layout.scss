@@ -1,0 +1,12 @@
+@import './avatar/layout';
+@import './error/layout';
+@import './layout/layout';
+@import './helpers/layout';
+
+@mixin init-modules-layout() {
+  @include init-avatar-layout();
+  @include init-error-layout();
+  @include init-layout-layout();
+  @include init-helpers-layout();
+}
+

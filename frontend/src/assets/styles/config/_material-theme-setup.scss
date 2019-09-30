@@ -1,0 +1,88 @@
+///////////////////////////////////////////////////////////
+// color palettes
+///////////////////////////////////////////////////////////
+$primary: mat-palette($mat-indigo);
+$accent:  mat-palette($mat-amber, A200, A100, A400);
+$warn:    mat-palette($mat-red);
+$gray:    mat-palette($mat-gray);
+$green:   mat-palette($mat-green);
+
+
+///////////////////////////////////////////////////////////
+// theme map
+// default setting for the theme
+///////////////////////////////////////////////////////////
+$theme:      mat-light-theme($primary, $accent, $warn);
+$theme:      map-merge(map-merge($theme, $typo), (name: light));
+$dark-theme: mat-dark-theme($primary, $accent, $warn);
+$dark-theme: map-merge(map-merge($dark-theme, $typo), (name: dark));
+
+
+
+///////////////////////////////////////////////////////////
+// overriding the default assets of the theme.
+// how to use these:
+// $pri: $mat-palette A500 or $pri: $mat-palette
+///////////////////////////////////////////////////////////
+@mixin override-palettes(
+    $pri: $mat-indigo A500 A200,
+    $acc: $mat-amber,
+    $wrn: $mat-red,
+    $gry: $mat-gray,
+    $grn: $mat-green
+  ) {
+  // create lists if the arguments is not a list and
+  // then remove null values.
+  $pList:  filter(join($pri, null, comma), null);
+  $aList:  filter(join($acc, null, comma), null);
+  $wList:  filter(join($wrn, null, comma), null);
+  $gList:  filter(join($gry, null, comma), null);
+  $grList: filter(join($grn, null, comma), null);
+
+
+  @if type-of($pri) == map {
+    $primary: mat-palette($pri) !global;
+  } @else {
+    $primary: mat-palette($pList...) !global;
+  }
+
+  @if type-of($acc) == map {
+    $accent: mat-palette($acc) !global;
+  } @else {
+    $accent: mat-palette($aList...) !global;
+  }
+
+  @if type-of($wrn) == map {
+    $warn: mat-palette($wrn) !global;
+  } @else {
+    $warn: mat-palette($wList...) !global;
+  }
+
+  @if type-of($gry) == map {
+    $gray: mat-palette($gry) !global;
+  } @else {
+    $gray: mat-palette($gList...) !global;
+  }
+
+  @if type-of($grn) == map {
+    $green: mat-palette($grn) !global;
+  } @else {
+    $green: mat-palette($grList...) !global;
+  }
+
+  $theme:      mat-light-theme($primary, $accent, $warn);
+  $theme:      map-merge(map-merge($theme, $typo), (name: light)) !global;
+  $dark-theme: mat-dark-theme($primary, $accent, $warn);
+  $dark-theme: map-merge(map-merge($dark-theme, $typo), (name: dark)) !global;
+}
+
+
+///////////////////////////////////////////////////////////
+// initialize angular material theming
+// @param {map} $theme-to-init angular theme map dark/light
+//              default is light.
+///////////////////////////////////////////////////////////
+@mixin init-mat-theme($theme-to-init: $theme) {
+  @include angular-material-theme($theme-to-init);
+}
+

@@ -1,0 +1,45 @@
+@mixin init-avatar-skin($theme) {
+  $isDark: get($theme, is-dark);
+  $color: get(primary, 700, $theme);
+  $bgColor: darken(get(background, background, $theme), 5%);
+  $bgInvertedColor: darken(get(foreground, base, $theme), 5%);
+  $sizes: get($theme, size);
+
+  @if $isDark {
+    $color: get(primary, 300, $theme);
+    $bgColor: lighten(get(background, background, $theme), 5%);
+    $bgInvertedColor: lighten(get(foreground, base, $theme), 5%);
+  }
+
+  %avatar {
+    background-color: $bgColor;
+    color: $color;
+    border-radius: 50%;
+
+    &__img {
+      border-radius: 50%;
+    }
+
+    &--inverted {
+      background-color: $color;
+      color: $bgColor;
+    }
+
+    &__icon {
+      font-size: get($sizes, xlarge);
+    }
+
+    &--small %avatar__icon {
+      font-size: get($sizes, medium);
+    }
+
+    &--medium %avatar__icon {
+      font-size: get($sizes, xxlarge);
+    }
+
+    &--large %avatar__icon {
+      font-size: get($sizes, xxxlarge);
+    }
+  }
+}
+

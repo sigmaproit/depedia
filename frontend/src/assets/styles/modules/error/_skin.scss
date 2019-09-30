@@ -1,0 +1,37 @@
+@mixin init-error-skin($theme) {
+  $bg: get(background, background, $theme);
+  $isDark: get($theme, is-dark);
+  $color: get(warn, 500);
+  $bgColor: mix(get(warn, 100), get($gray, 100), 50%);
+  $weights: get($theme, weight);
+  $sizes: get($theme, size);
+  $borderColor: darken($bgColor, 10%);
+
+  @if $isDark {
+    $bgColor: mix(get(warn, 500), $bg, 30%);
+    $color: get(warn, 700);
+    $borderColor: mix(get(warn, 700), $bg, 70%);
+  }
+
+  %error {
+    border: 1px solid $borderColor;
+    border-left-width: pxToRem(5);
+    background-color: $bgColor;
+    color: $color;
+    border-radius: pxToRem(5) pxToRem(3) pxToRem(3) pxToRem(5);
+
+    &__title {
+      font-size: get($sizes, medium);
+      font-weight: get($weights, medium);
+    }
+
+    &__message {
+      font-size: get($sizes, normal);
+      font-weight: get($weights, light);
+    }
+
+    &__message-bold {
+      font-weight: get($weights, bold);
+    }
+  }
+}

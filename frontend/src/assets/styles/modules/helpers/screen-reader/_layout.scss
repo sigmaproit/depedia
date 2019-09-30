@@ -1,0 +1,12 @@
+@mixin init-screen-reader-layout() {
+  .p-screen-reader {
+    position: absolute !important;
+    clip: rect(1px,1px,1px,1px);
+    margin: 0;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+  }
+}
+
+

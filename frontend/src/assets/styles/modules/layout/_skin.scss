@@ -1,0 +1,25 @@
+@mixin init-layout-skin($theme) {
+  $clr-primary: get(primary, 100);
+  $clr-gray: get($gray, 100);
+  $clr-gray-dark: lighten(get($gray, 900), 6.5%);
+  $bg: lighten(mix($clr-primary, $clr-gray, 50%), 5%);
+
+  @if get($theme, is-dark) {
+    $bg: mix($clr-primary, $clr-gray-dark, 5%);
+  }
+
+  .p-layout__sidenav-container {
+    transition: background-color .2s ease-in-out;
+    background-color: $bg;
+  }
+
+
+  .p-layout__sidenav {
+    transition: background-color .2s ease-in-out;
+
+    @if get($theme, is-dark) {
+      background-color: mix($clr-primary, $bg, 10%);
+    }
+  }
+}
+

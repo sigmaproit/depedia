@@ -1,0 +1,41 @@
+@mixin init-layout-layout() {
+  $padding: pxToRem(2 * $space-base, $space-base);
+
+  .p-layout {
+    &,
+    & * {
+      box-sizing: border-box;
+    }
+
+    &,
+    &__sidenav-container{
+      display: flex;
+      flex-direction: column;
+      min-width: 100%;
+      width: 100%;
+      min-height: 100%;
+      flex: 1;
+    }
+
+    &__page {
+      padding: $padding;
+    }
+
+    &__spacer {
+      flex: 1;
+    }
+
+    &__fixed-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 2;
+    }
+
+    &__fixed-header + .p-layout__content {
+      padding-top: 64px;
+    }
+  }
+}
+

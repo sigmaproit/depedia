@@ -1,0 +1,55 @@
+@mixin adjust-size($size) {
+  width: pxToRem($size);
+  min-width: pxToRem($size);
+  height: pxToRem($size);
+  min-height: pxToRem($size);
+  line-height: pxToRem($size);
+}
+
+
+@mixin init-avatar-layout() {
+  %avatar {
+    @include adjust-size(32);
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+
+    &__img {
+      width: 100%;
+      height: auto;
+      min-width: 100%;
+      min-height: 100%;
+    }
+
+    &__icon {
+      @include adjust-size(32);
+      text-align: center;
+    }
+
+    &__icon,
+    &__img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
+    }
+
+    &--small,
+    &--small %avatar__icon{
+      @include adjust-size(24);
+    }
+
+    &--medium,
+    &--medium %avatar__icon{
+      @include adjust-size(42);
+    }
+
+    &--large,
+    &--large %avatar__icon {
+      @include adjust-size(54);
+    }
+  }
+}
+

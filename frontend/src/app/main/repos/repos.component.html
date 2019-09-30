@@ -1,0 +1,60 @@
+<div>
+    <h2>Repositories</h2>
+
+    <mat-accordion class="repos-acc">
+        <mat-expansion-panel *ngFor="let repo of repoList" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{ repo.name }}</mat-panel-title>
+                <mat-panel-description>
+                    created at: {{ repo.created_at | date }}
+                    <span matBadge="{{repo.depend_on.length}}" matBadgeColor="primary" matBadgeSize="small"></span>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p *ngIf="!repo.depend_on.length">No dependency for this repository.</p>
+            <mat-list>
+                <mat-list-item *ngFor="let dep of repo.depend_on" class="dep-item">
+                    <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100%">
+                        <p>{{ dep.name }}</p>
+                        <div fxLayout="row" fxLayoutAlign="end center" fxFlex="50%">
+                            <mat-form-field class="api-url">
+                                <input matInput placeholder="API URL" [(ngModel)]="dep.api_url">
+                            </mat-form-field>
+                            <button mat-button (click)="saveDep(dep)">Save</button>
+                        </div>
+                    </div>
+                </mat-list-item>
+                <mat-hint style="color: green; margin-left: 16px;" *ngIf="repoApiSaved">Saved!</mat-hint>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                    <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100%">
+                        <p class="default-url">Default API URL for repo</p>
+                        <div fxLayout="row" fxLayoutAlign="end center" fxFlex="50%">
+                            <mat-form-field class="api-url">
+                                <input matInput placeholder="API URL" [(ngModel)]="repo.repo_api_url">
+                                <mat-hint style="color: green;" *ngIf="defaultRepoApiSaved">Saved!</mat-hint>
+                            </mat-form-field>
+                            <button mat-button (click)="saveRepoDefaultAPI(repo)">Save</button>
+                        </div>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-card class="defaults-card">
+        <mat-card-title>Defaults</mat-card-title>
+        <mat-card-content>
+            <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100%">
+                <p>Default API URL for all repos</p>
+                <div fxLayout="row" fxLayoutAlign="end center" fxFlex="70%">
+                    <mat-form-field class="api-url">
+                        <input matInput placeholder="API URL" [(ngModel)]="user.user_api_url">
+                        <mat-hint [hidden]="defaultUserApiSaved">*If API URL for a dependency not found, default value for repo will be used, otherwise this top level API URL will be used.</mat-hint>
+                        <mat-hint style="color: green;" [hidden]="!defaultUserApiSaved">Saved!</mat-hint>
+                    </mat-form-field>
+                    <button mat-button (click)="saveUserDefaultAPI()">Save</button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

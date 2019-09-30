@@ -1,0 +1,30 @@
+@mixin init-shadow($theme) {
+  $is-dark: get($theme, is-dark);
+  $alphas: .13 .17 .1;
+  $clr-default: rgb(0, 0, 0);
+  $clr-primary: get(primary, 500, $theme);
+  $clr-accent: get(accent, 500, $theme);
+  $clr-warn: get(warn, 500, $theme);
+
+  @if $is-dark {
+    $alphas: .19 .23 .17;
+  }
+
+  .p-shadow {
+    @include huge-shadow($clr-default, $alphas...);
+  }
+
+  .p-shadow-primary {
+    @include huge-shadow($clr-primary, $alphas...);
+  }
+
+  .p-shadow-accent {
+    @include huge-shadow($clr-accent, $alphas...);
+  }
+
+  .p-shadow-warn {
+    @include huge-shadow($clr-warn, $alphas...);
+  }
+}
+
+

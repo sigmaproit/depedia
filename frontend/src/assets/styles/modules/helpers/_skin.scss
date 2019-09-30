@@ -1,0 +1,8 @@
+@import './shadow/skin';
+@import './colors/skin';
+
+@mixin init-helpers-skin($theme) {
+  @include init-shadow($theme);
+  @include init-colors-skin($theme);
+}
+

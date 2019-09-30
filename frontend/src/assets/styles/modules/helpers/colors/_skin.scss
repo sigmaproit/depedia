@@ -1,0 +1,27 @@
+@mixin init-colors-skin($theme) {
+  $palettes: (
+    primary: $primary,
+    gray: $gray,
+    accent: $accent,
+    green: $green,
+    warn: $warn
+  );
+
+  $tones: (offwhite: 50, light: 200, default: 500, dark: 700);
+
+  @each $name, $palette in $palettes {
+    @each $tone, $val in $tones {
+      $suffix: if($tone == default, '#{$name}', '#{$name}-#{$tone}');
+      $clr: get($palette, $val);
+
+      .p-bg-#{$suffix} {
+        background-color: $clr;
+      }
+
+      .p-text-#{$suffix} {
+        color: $clr;
+      }
+    }
+  }
+}
+

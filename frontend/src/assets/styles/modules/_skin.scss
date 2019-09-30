@@ -1,0 +1,12 @@
+@import './avatar/skin';
+@import './error/skin';
+@import './layout/skin';
+@import './helpers/skin';
+
+@mixin init-modules-skin($theme) {
+  @include init-avatar-skin($theme);
+  @include init-error-skin($theme);
+  @include init-layout-skin($theme);
+  @include init-helpers-skin($theme);
+}
+
