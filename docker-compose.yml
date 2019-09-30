@@ -1,0 +1,50 @@
+version: '3'
+
+volumes:
+  dm_data:
+    external: false
+
+
+services:
+  backend:
+    build: backend
+    image: backend-image:latest
+    expose:
+      - 5000
+    env_file: backend/.env
+    depends_on:
+      - redis
+      - db
+    volumes:
+      - ./backend:/code
+    restart: always
+    command: "python app.py"
+
+  worker:
+    image: backend-image:latest
+    env_file: backend/.env
+    volumes:
+      - ./backend:/code
+    depends_on:
+      - backend
+      - redis
+      - db
+    command: "celery -A app.celery  worker -l info"
+
+  redis:
+    image: "redis:5.0.1-alpine"
+    restart: always
+
+  db:
+    image: 'postgres:10.10-alpine'
+    volumes:
+      - dm_data:/var/lib/postgresql/data
+    env_file: backend/.env
+
+  frontend:
+      build: frontend
+      restart: always
+      ports:
+        - 80:80
+      depends_on:
+        - backend
