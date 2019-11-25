@@ -1,23 +1,26 @@
 stages:
-  - dependencies
+  - frontend
 
 
-install_dependencies:
-  stage: dependencies
-  image: node:10.9-alpine
+frontend_image:
+  stage: frontend
+  image: docker:git
+  services:
+    - docker:dind
   script:
     - set -e
     - set -o pipefail
-    - apk update && apk upgrade && apk add --no-cache bash git openssh
-    - cd frontend/
-    - npm i
-    - npm run build -- ex-library
-    - npm run build -- --project=ex-admin --prod
-    - mkdir dist && touch dist/test-file
-    - tar zcvf dist.tar dist
+    - export GIT_REV_COUNT=`git rev-list --count HEAD`
+    - export GIT_COMMIT_HASH=`git rev-parse --short HEAD`
+    - export VERSION=v$GIT_REV_COUNT.$GIT_COMMIT_HASH
+    - docker login -u $DOCKER_HUB_USR -p $DOCKER_HUB_TOKEN
+    - docker build -t $FRONTEND_IMAGE:$VERSION -t $FRONTEND_IMAGE:latest -f ./frontend/Dockerfile .
+    - docker push $FRONTEND_IMAGE:$VERSION
+    - if [ "$CI_COMMIT_REF_NAME" = "master" ] ; then docker push $FRONTEND_IMAGE:latest; fi
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
 
-  artifacts:
-    paths:
-      - dist.tar
+
 
 
