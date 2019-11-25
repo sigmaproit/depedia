@@ -1,0 +1,23 @@
+stages:
+  - dependencies
+
+
+install_dependencies:
+  stage: dependencies
+  image: node:8.10-alpine
+  script:
+    - set -e
+    - set -o pipefail
+    - apk update && apk upgrade && apk add --no-cache bash git openssh
+    - cd frontend/
+    - npm i
+    - npm run build -- ex-library
+    - npm run build -- --project=ex-admin --prod
+    - mkdir dist && touch dist/test-file
+    - tar zcvf dist.tar dist
+
+  artifacts:
+    paths:
+      - dist.tar
+
+
