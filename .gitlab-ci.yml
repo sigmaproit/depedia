@@ -4,7 +4,7 @@ stages:
 
 install_dependencies:
   stage: dependencies
-  image: node:8.10-alpine
+  image: node:10.9-alpine
   script:
     - set -e
     - set -o pipefail
