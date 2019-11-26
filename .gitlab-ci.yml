@@ -14,7 +14,7 @@ frontend_image:
     - export GIT_COMMIT_HASH=`git rev-parse --short HEAD`
     - export VERSION=v$GIT_REV_COUNT.$GIT_COMMIT_HASH
     - docker login -u $DOCKER_HUB_USR -p $DOCKER_HUB_TOKEN
-    - docker build -t $DOCKER_HUB_USR/$FRONTEND_IMAGE:$VERSION -t $FRONTEND_IMAGE:latest -f ./frontend/Dockerfile ./frontend
+    - docker build -t $DOCKER_HUB_USR/$FRONTEND_IMAGE:$VERSION -t $DOCKER_HUB_USR/$FRONTEND_IMAGE:latest -f ./frontend/Dockerfile ./frontend
     - docker push $DOCKER_HUB_USR/$FRONTEND_IMAGE:$VERSION
     - if [ "$CI_COMMIT_REF_NAME" = "master" ] ; then docker push $DOCKER_HUB_USR/$FRONTEND_IMAGE:latest; fi
   variables:
