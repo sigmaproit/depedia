@@ -1,0 +1,22 @@
+apiVersion: v1
+data:
+  APP_SETTINGS: config.ProductionConfig
+  CELERY_BROKER_URL: redis://redis:6379/0
+  CELERY_RESULT_BACKEND: redis://redis:6379/0
+  CLIENT_ID: dbf8415f4c37452944c7
+  CLIENT_SECRET: 7b985c27c56528cdfb6a51dfcd0f57cf204836b8
+  DATABASE_URL: postgresql://dm_admin:dm_pwd@db:5432/dm_db
+  GITHUB_WEBHOOKS_SECRET: webhookpass
+  HOST: localhost
+  OAUTHLIB_INSECURE_TRANSPORT: "1"
+  POSTGRES_DB: dm_db
+  POSTGRES_PASSWORD: dm_pwd
+  POSTGRES_PORT: "5432"
+  POSTGRES_USER: dm_admin
+  REDIRECT_URL: http://127.0.0.1:5000/github_login
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: backend-backend--env
+  name: backend-backend--env

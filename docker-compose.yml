@@ -7,8 +7,7 @@ volumes:
 
 services:
   backend:
-    build: backend
-    image: backend-image:latest
+    image: "${BACKEND_IMAGE}:${BACKEND_IMAGE_TAG}"
     expose:
       - 5000
     env_file: backend/.env
@@ -21,7 +20,7 @@ services:
     command: "python app.py"
 
   worker:
-    image: backend-image:latest
+    image: "${BACKEND_IMAGE}:${BACKEND_IMAGE_TAG}"
     env_file: backend/.env
     volumes:
       - ./backend:/code
@@ -42,7 +41,7 @@ services:
     env_file: backend/.env
 
   frontend:
-      build: frontend
+      image: "${FRONTEND_IMAGE}:${FRONTEND_IMAGE_TAG}"
       restart: always
       ports:
         - 80:80

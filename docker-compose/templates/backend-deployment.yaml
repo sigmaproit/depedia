@@ -1,0 +1,107 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -c
+    kompose.version: 1.18.0 (06a2e56)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: backend
+  name: backend
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: backend
+    spec:
+      containers:
+      - args:
+        - python
+        - app.py
+        env:
+        - name: APP_SETTINGS
+          valueFrom:
+            configMapKeyRef:
+              key: APP_SETTINGS
+              name: backend-backend--env
+        - name: CELERY_BROKER_URL
+          valueFrom:
+            configMapKeyRef:
+              key: CELERY_BROKER_URL
+              name: backend-backend--env
+        - name: CELERY_RESULT_BACKEND
+          valueFrom:
+            configMapKeyRef:
+              key: CELERY_RESULT_BACKEND
+              name: backend-backend--env
+        - name: CLIENT_ID
+          valueFrom:
+            configMapKeyRef:
+              key: CLIENT_ID
+              name: backend-backend--env
+        - name: CLIENT_SECRET
+          valueFrom:
+            configMapKeyRef:
+              key: CLIENT_SECRET
+              name: backend-backend--env
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              key: DATABASE_URL
+              name: backend-backend--env
+        - name: GITHUB_WEBHOOKS_SECRET
+          valueFrom:
+            configMapKeyRef:
+              key: GITHUB_WEBHOOKS_SECRET
+              name: backend-backend--env
+        - name: HOST
+          valueFrom:
+            configMapKeyRef:
+              key: HOST
+              name: backend-backend--env
+        - name: OAUTHLIB_INSECURE_TRANSPORT
+          valueFrom:
+            configMapKeyRef:
+              key: OAUTHLIB_INSECURE_TRANSPORT
+              name: backend-backend--env
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_DB
+              name: backend-backend--env
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_PASSWORD
+              name: backend-backend--env
+        - name: POSTGRES_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_PORT
+              name: backend-backend--env
+        - name: POSTGRES_USER
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_USER
+              name: backend-backend--env
+        - name: REDIRECT_URL
+          valueFrom:
+            configMapKeyRef:
+              key: REDIRECT_URL
+              name: backend-backend--env
+        image: {{ .Values.backend.image }}:{{ .Values.backend.imageTag }}
+        name: backend
+        resources: {}
+        volumeMounts:
+        - mountPath: /code
+          name: backend-claim0
+      restartPolicy: Always
+      volumes:
+      - name: backend-claim0
+        persistentVolumeClaim:
+          claimName: backend-claim0
+status: {}

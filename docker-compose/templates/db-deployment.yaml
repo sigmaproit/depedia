@@ -1,0 +1,104 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -c
+    kompose.version: 1.18.0 (06a2e56)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: db
+  name: db
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: db
+    spec:
+      containers:
+      - env:
+        - name: APP_SETTINGS
+          valueFrom:
+            configMapKeyRef:
+              key: APP_SETTINGS
+              name: db-backend--env
+        - name: CELERY_BROKER_URL
+          valueFrom:
+            configMapKeyRef:
+              key: CELERY_BROKER_URL
+              name: db-backend--env
+        - name: CELERY_RESULT_BACKEND
+          valueFrom:
+            configMapKeyRef:
+              key: CELERY_RESULT_BACKEND
+              name: db-backend--env
+        - name: CLIENT_ID
+          valueFrom:
+            configMapKeyRef:
+              key: CLIENT_ID
+              name: db-backend--env
+        - name: CLIENT_SECRET
+          valueFrom:
+            configMapKeyRef:
+              key: CLIENT_SECRET
+              name: db-backend--env
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              key: DATABASE_URL
+              name: db-backend--env
+        - name: GITHUB_WEBHOOKS_SECRET
+          valueFrom:
+            configMapKeyRef:
+              key: GITHUB_WEBHOOKS_SECRET
+              name: db-backend--env
+        - name: HOST
+          valueFrom:
+            configMapKeyRef:
+              key: HOST
+              name: db-backend--env
+        - name: OAUTHLIB_INSECURE_TRANSPORT
+          valueFrom:
+            configMapKeyRef:
+              key: OAUTHLIB_INSECURE_TRANSPORT
+              name: db-backend--env
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_DB
+              name: db-backend--env
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_PASSWORD
+              name: db-backend--env
+        - name: POSTGRES_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_PORT
+              name: db-backend--env
+        - name: POSTGRES_USER
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_USER
+              name: db-backend--env
+        - name: REDIRECT_URL
+          valueFrom:
+            configMapKeyRef:
+              key: REDIRECT_URL
+              name: db-backend--env
+        image: postgres:10.10-alpine
+        name: db
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: dm-data
+      restartPolicy: Always
+      volumes:
+      - name: dm-data
+        persistentVolumeClaim:
+          claimName: dm-data
+status: {}

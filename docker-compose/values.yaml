@@ -1,0 +1,7 @@
+backend:
+  image: sigmaproit/dependency-manager-be
+  imageTag: latest
+
+frontend:
+  image: sigmaproit/dependency-manager-frontend
+  imageTag: latest
