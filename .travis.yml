@@ -11,10 +11,10 @@ script:
   - docker login -u $DOCKER_HUB_USR -p $DOCKER_HUB_TOKEN
   - docker build -t $DOCKER_HUB_USR/$FRONTEND_IMAGE:$VERSION -t $DOCKER_HUB_USR/$FRONTEND_IMAGE:latest -f ./frontend/Dockerfile ./frontend
   - docker push $DOCKER_HUB_USR/$FRONTEND_IMAGE:$VERSION
-  - if [ "$CI_COMMIT_REF_NAME" = "master" ] ; then docker push $DOCKER_HUB_USR/$FRONTEND_IMAGE:latest; fi
+  - if [ "$TRAVIS_BRANCH" = "master" ] ; then docker push $DOCKER_HUB_USR/$FRONTEND_IMAGE:latest; fi
   - docker build -t $DOCKER_HUB_USR/$BE_IMAGE:$VERSION -t $DOCKER_HUB_USR/$BE_IMAGE:latest -f ./backend/Dockerfile ./backend
   - docker push $DOCKER_HUB_USR/$BE_IMAGE:$VERSION
-  - if [ "$CI_COMMIT_REF_NAME" = "master" ] ; then docker push $DOCKER_HUB_USR/$BE_IMAGE:latest; fi
+  - if [ "$TRAVIS_BRANCH" = "master" ] ; then docker push $DOCKER_HUB_USR/$BE_IMAGE:latest; fi
 variables:
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
