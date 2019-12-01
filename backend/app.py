@@ -21,4 +21,4 @@ if __name__ == '__main__':
     from views.auth import *
     from views.views import *
 
-    app.run(debug=True, host='0.0.0.0', port=os.getenv('PORT', 5000))
+    app.run(debug=os.getenv('DEBUG', False), host='0.0.0.0', port=os.getenv('PORT', 5000))

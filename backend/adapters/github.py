@@ -75,7 +75,8 @@ def update_dependence(data):
         dep = RepoDependency.query.get(data['id'])
         if not dep:
             raise NotFound('dependency not found')
-        repo = RepoDependencySchema().load(data, instance=dep)
+
+        RepoDependencySchema().load(data, instance=dep)
     except KeyError:
         raise KeyError("id not found")
     db.session.commit()

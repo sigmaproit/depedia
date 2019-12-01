@@ -1,6 +1,6 @@
 import os
 
-from flask_dance.contrib.github import make_github_blueprint , github
+from flask_dance.contrib.github import make_github_blueprint, github
 
 from app import app
 

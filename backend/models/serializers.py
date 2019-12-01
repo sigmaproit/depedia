@@ -42,7 +42,7 @@ class RepoSchema(ma.ModelSchema):
     def add_depend_on(self, data, many):
         if many:
             for i, repo in enumerate(data):
-                repo['depend_on'], temp = self.repodependencyschema.dump(adapters.github.get_dependence(repo['id']))
+                repo['depend_on'], _ = self.repodependencyschema.dump(adapters.github.get_dependence(repo['id']))
                 data[i] = repo
             return data
         else:
@@ -54,7 +54,7 @@ class RepoLoadSchema(ma.ModelSchema):
     """    that schema was created to be used in update this fields    """
 
     class Meta:
-        Model: Repo
+        Model = Repo
         fields = ['id', 'name', 'full_name', 'url', 'default_branch', 'repo_api_url']
 
 

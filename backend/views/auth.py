@@ -17,7 +17,7 @@ def login():
         user = create_user()
         create_token(user)
         create_user_repos()
-        res = load_user_dependency.apply_async((user.id,))
+        load_user_dependency.apply_async((user.id,))
         authorized_url = f'{app.config.get("APP_HOST")}/authorized'
         return redirect(authorized_url)
 

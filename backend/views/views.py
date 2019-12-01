@@ -26,7 +26,7 @@ def get_user():
 def create_dep():
     if github.authorized:
         user = get_current_user()
-        res = load_user_dependency.apply_async((user.id,))
+        load_user_dependency.apply_async((user.id,))
         return jsonify(message="dep was created")
     else:
         return jsonify(message="an error has happen ")
