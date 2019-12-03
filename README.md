@@ -19,6 +19,33 @@ Dependency graph will give you an overall view for your project.
 
 
 ## How?
-This tool is a standalone tool, you will lunch it as described in [usage section](). Now we support integration with [GitHub](https://github.com/) users only.    
+This tool is a standalone tool, you will lunch it as described in [usage section](#usage). Now we support integration with [GitHub](https://github.com/) users only.    
 Once you give our tool the permission it will find out all your repositories and check its dependencies.  
-When any dependency has a new version our tool will send this info through the API you configured in [configuration section]().
+When any dependency has a new version our tool will send this info through the API you configured in [configuration section]().  
+
+---
+
+## Usage
+
+- Docker-compose
+first of all docker-compose must be installed on deployment machine 
+```bash
+git clone git@github.com:sigmaproit/depedia.git
+cd depedia
+set -o allexport
+source .env
+set +o allexport
+docker-compose up -d
+
+```
+depedia now is available throw port 80 (if you want to change it, change `EXPOSE_PORT` in `.env`) you can choose how to serve it.  
+
+- Helm chart
+you must install helm client and configure it to link it with your cluster
+```bash
+git clone git@github.com:sigmaproit/depedia.git
+cd depedia
+helm install --name depedia ./depedia
+
+```
+Depedia is running right now on your cluster and ready to export frontend service with name: `frontend` using ingress.  
