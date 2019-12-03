@@ -12,11 +12,9 @@ This tool also tracks project parts, if project has many components each compone
 
 It also gives you a dependency graph to see your full dependency picture.   
 
-
 ## Why?
 The motivation for this tool is the hassle of managing the local dependency for project parts, we found it would be better if there's a tool to tell us that project dependency has a new version (automatically) would save us alot of time.  
 Dependency graph will give you an overall view for your project.  
-
 
 ## How?
 This tool is a standalone tool, you will lunch it as described in [usage section](#usage). Now we support integration with [GitHub](https://github.com/) users only.    
@@ -27,7 +25,7 @@ When any dependency has a new version our tool will send this info through the A
 
 ## Usage
 
-- Docker-compose
+  - **Docker-compose**:  
 first of all docker-compose must be installed on deployment machine 
 ```bash
 git clone git@github.com:sigmaproit/depedia.git
@@ -40,7 +38,7 @@ docker-compose up -d
 ```
 depedia now is available throw port 80 (if you want to change it, change `EXPOSE_PORT` in `.env`) you can choose how to serve it.  
 
-- Helm chart
+  - **Helm chart**:  
 you must install helm client and configure it to link it with your cluster
 ```bash
 git clone git@github.com:sigmaproit/depedia.git
