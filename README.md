@@ -19,7 +19,7 @@ Dependency graph will give you an overall view for your project.
 ## How?
 This tool is a standalone tool, you will lunch it as described in [usage section](#usage). Now we support integration with [GitHub](https://github.com/) users only.    
 Once you give our tool the permission it will find out all your repositories and check its dependencies.  
-When any dependency has a new version our tool will send this info through the API you configured in [configuration section]().  
+When any dependency has a new version our tool will send this info through the API you configured in [configuration section](#configuration).  
 
 ---
 
@@ -47,3 +47,19 @@ helm install --name depedia ./depedia
 
 ```
 Depedia is running right now on your cluster and ready to export frontend service with name: `frontend` using ingress.  
+
+
+## Configuration  
+After running depedia, now you have to configure it to start managing your dependency   
+- Login with your github user and give depedia permissions to access your repositories  
+- From repos page you can manage your repositories and find all dependencies for each repo, for each dependency you can set the API you want to call when it has a new version  
+- Be aware of the default API if you don't want to repeat yourself, you have a default one for single repo and another one for all repos
+
+
+## Contributing
+All contributions, bug reports, bug fixes, enhancements and ideas are welcome.  
+To run this system locally using docker-compose you have to add this for `docker-compose.yml`
+```yaml
+network_mode: 'host'
+```
+for `backend` and `frontend` services
