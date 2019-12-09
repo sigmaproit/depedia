@@ -54,7 +54,8 @@ After running depedia, now you have to configure it to start managing your depen
 - Login with your github user and give depedia permissions to access your repositories  
 - From repos page you can manage your repositories and find all dependencies for each repo, for each dependency you can set the API you want to call when it has a new version  
 - Be aware of the default API if you don't want to repeat yourself, you have a default one for single repo and another one for all repos  
-**Repo dependency file**
+
+**Repo dependency file**  
  Every repo must have a dependency file with name `DM.yml` and this's an example for this file:   
  ```
  github:
